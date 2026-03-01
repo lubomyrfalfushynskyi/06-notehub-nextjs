@@ -34,10 +34,11 @@ export const createNote = async (noteData: CreateNoteDto): Promise<Note> => {
 };
 
 export const updateNote = async (id: string, noteData: UpdateNoteDto): Promise<Note> => {
-  const { data } = await api.put<Note>(`/notes/${id}`, noteData);
+  const { data } = await api.patch<Note>(`/notes/${id}`, noteData);
   return data;
 };
 
-export const deleteNote = async (id: string): Promise<void> => {
-  await api.delete(`/notes/${id}`);
+export const deleteNote = async (id: string): Promise<Note> => {
+  const { data } = await api.delete<Note>(`/notes/${id}`);
+  return data;
 };
